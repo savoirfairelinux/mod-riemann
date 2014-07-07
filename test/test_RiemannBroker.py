@@ -1,6 +1,7 @@
 from module.module import RiemannBroker, get_instance
-import riemann_client.transport
 from shinken.objects.module import Module
+import riemann_client.transport
+import socket
 
 import unittest
 
@@ -15,8 +16,11 @@ class TestRiemannBroker(unittest.TestCase):
             }
         )
         self.broker = RiemannBroker(self.basic_modconf)
-        self.broker.use_udp = True
         self.broker.init()
+
+        #Fake riemann
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.bind(('127.0.0.1', 5555))
 
     def test_get_instance(self):
         result = get_instance(self.basic_modconf)
