@@ -15,6 +15,7 @@ class TestRiemannBroker(unittest.TestCase):
             }
         )
         self.broker = RiemannBroker(self.basic_modconf)
+        self.broker.use_udp = True
         self.broker.init()
 
     def test_get_instance(self):
