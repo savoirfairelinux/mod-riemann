@@ -18,7 +18,7 @@
     "riemann",
   ],
   "dependencies": {
-    "shinken": ">=1.4",
+    "shinken": ">2.0.3",
     "riemann-client": ">=4.1.2"
   },
   "license": "AGPL"
