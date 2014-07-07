@@ -9,6 +9,10 @@ import unittest
 class TestRiemannBroker(unittest.TestCase):
 
     def setUp(self):
+        #Fake riemann
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.bind(('127.0.0.1', 5555))
+
         self.basic_modconf = Module(
             {
                 'module_name': 'riemannBroker',
@@ -17,10 +21,6 @@ class TestRiemannBroker(unittest.TestCase):
         )
         self.broker = RiemannBroker(self.basic_modconf)
         self.broker.init()
-
-        #Fake riemann
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.bind(('127.0.0.1', 5555))
 
     def test_get_instance(self):
         result = get_instance(self.basic_modconf)
