@@ -1,7 +1,6 @@
 from module.module import RiemannBroker, get_instance
 from shinken.objects.module import Module
 import riemann_client.transport
-import socket
 
 import unittest
 
@@ -9,9 +8,6 @@ import unittest
 class TestRiemannBroker(unittest.TestCase):
 
     def setUp(self):
-        #Fake riemann
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.bind(('127.0.0.1', 5555))
 
         self.basic_modconf = Module(
             {
@@ -20,6 +16,7 @@ class TestRiemannBroker(unittest.TestCase):
             }
         )
         self.broker = RiemannBroker(self.basic_modconf)
+        self.broker.use_udp = True
         self.broker.init()
 
     def test_get_instance(self):
@@ -54,13 +51,6 @@ class TestRiemannBroker(unittest.TestCase):
         self.assertEqual(broker.use_udp, False)
 
     def test_transport_modes(self):
-        #By default, we should use TCPTransport
-        broker = RiemannBroker(self.basic_modconf)
-        broker.init()
-        self.assertTrue(
-            type(broker.client.transport) is riemann_client.transport.TCPTransport
-        )
-
         #If use_udp is set, we should use UDPTransport
         broker = RiemannBroker(self.basic_modconf)
         broker.use_udp = True
