@@ -1,0 +1,25 @@
+{
+  "name": "mod-riemann",
+  "types": ["module"],
+  "version": "0.1",
+  "homepage": "https://github.com/savoirfairelinux/mod-riemann",
+  "author": "Alexandre Viau",
+  "description": "Export host and service performance data and events to riemann",
+  "contributors": [
+    {
+      "name": "Alexandre Viau",
+      "email": "alexandre.viau@savoirfairelinux.com"
+    }
+  ],
+  "repository": "https://github.com/savoirfairelinux/mod-riemann",
+  "keywords": [
+    "module",
+    "broker",
+    "riemann",
+  ],
+  "dependencies": {
+    "shinken": ">=1.4",
+    "riemann-client": ">=4.1.2"
+  },
+  "license": "AGPL"
+}
